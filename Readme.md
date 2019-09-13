@@ -1,7 +1,7 @@
 # Учебный проект «Код и Магия» [![Build status][travis-image]][travis-url]
 
 * Студент: [Анна Абросимова](https://up.htmlacademy.ru/javascript/18/user/1168059).
-* Наставник: `Неизвестно`.
+* Наставник: `Иван Марченко`.
 
 ---
 
