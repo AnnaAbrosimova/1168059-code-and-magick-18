@@ -51,12 +51,11 @@ var setup = document.querySelector('.setup');
 var openSetupButton = document.querySelector('.setup-open');
 var closeSetupButton = setup.querySelector('.setup-close');
 var userName = setup.querySelector('.setup-user-name');
-var saveSubmit = document.querySelector('.button setup-submit');
-// console.log(saveSubmit);
+var saveSetupButton = document.querySelector('button.setup-submit');
 var ESC_KEYCODE = 27;
 var ENTER_KEYCODE = 13;
 var onPopupEscPress = function (evt) {
-  if (evt.keyCode === ESC_KEYCODE && (!userName)) { // проверяю, что при фокусе на ввод имени на esc закрыть нельзя (не работает)
+  if (evt.keyCode === ESC_KEYCODE && (userName !== document.activeElement)) { // проверяю, что при фокусе на ввод имени на esc закрыть нельзя (не работает)
     closePopup();
   }
 };
@@ -84,9 +83,8 @@ closeSetupButton.addEventListener('keydown', function (evt) {
     closePopup();
   }
 });
-// saveSubmit не находит почему-то, в консоли выводит 0
-saveSubmit.addEventListener('keydown', function (evt) {
-  if (evt.keyCode === ENTER_KEYCODE) {
+saveSetupButton.addEventListener('keydown', function (evt) {
+  if ((evt.keyCode === ENTER_KEYCODE) && (saveSetupButton === document.activeElement)) {
     setup.submit();
   }
 });
@@ -107,16 +105,18 @@ function getIterator(array) {
 var getNextCoatColor = getIterator(coatColors);
 var getNextEyeColor = getIterator(eyesColors);
 var getNextFireballColor = getIterator(fireballColors);
-// дальше при нажатии цвета меняются, но при отправке формы отображаются старые значения из инпута
+var coat = document.querySelector('input[name=coat-color]');
+var eyes = document.querySelector('input[name=eyes-color]');
+var fireball = document.querySelector('input[name=fireball-color]');
 ChangeCoatCol.addEventListener('click', function () {
   ChangeCoatCol.style.fill = getNextCoatColor();
-  ChangeCoatCol.setAttribute('value', getNextCoatColor());
+  coat.setAttribute('value', ChangeCoatCol.style.fill);
 });
 ChangeEyesCol.addEventListener('click', function () {
   ChangeEyesCol.style.fill = getNextEyeColor();
-  ChangeEyesCol.setAttribute('value', getNextEyeColor());
+  eyes.setAttribute('value', ChangeEyesCol.style.fill);
 });
 ChangeFireballCol.addEventListener('click', function () {
   ChangeFireballCol.style.background = getNextFireballColor();
-  ChangeFireballCol.setAttribute('value', getNextFireballColor());
+  fireball.setAttribute('value', getNextFireballColor());
 });
